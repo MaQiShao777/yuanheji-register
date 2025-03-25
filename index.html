@@ -63,6 +63,10 @@
       color: #999;
       margin-top: 20px;
     }
+    .login-link {
+      font-size: 14px;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
@@ -79,14 +83,20 @@
       </form>
     </div>
 
-    <div class="step">
-      <div class="step-title">第二步：注册成功后，开通礼包</div>
-      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button" style="display:none;">→ 前往领取礼包</a>
+    <div class="step" id="afterRegister" style="display:none;">
+      <div class="step-title">第二步：点击进入官方平台完成激活</div>
+      <a id="registerBtn" href="#" target="_blank" class="button">→ 前往倍莱鲜注册</a>
+      <p style="margin: 10px 0; color: #999; font-size: 13px;">注册成功后请返回此页领取礼包</p>
+      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button" style="display:none;">→ 我已完成注册，领取礼包</a>
+    </div>
+
+    <div class="login-link">
+      已有账号？<a href="#" onclick="alert('此处将跳转到登录页，功能开发中')">点击登录</a>
     </div>
 
     <div class="tips">
       * 元和集提供专业陪跑与服务支持，实际产品与发货由倍莱鲜官方平台提供。<br>
-      * 请先注册完成，再点击上方按钮领取礼包，确保权益绑定无误。
+      * 请严格按步骤完成注册→平台激活→礼包领取，确保权益绑定无误。
     </div>
   </div>
 
@@ -101,18 +111,16 @@
         return;
       }
 
-fetch("https://run.mocky.io/v3/55fd0664-4b79-41eb-9f7d-27cd3182eb13", {
+      fetch("https://run.mocky.io/v3/55fd0664-4b79-41eb-9f7d-27cd3182eb13", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
         },
         body: JSON.stringify({ phone, password })
       }).then(() => {
-        alert("注册成功！接下来将跳转至官方会员系统完成产品激活...");
-        setTimeout(() => {
-          window.open(`http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`, '_blank');
-          document.getElementById("giftBtn").style.display = 'inline-block';
-        }, 1000);
+        alert("注册成功，请点击按钮跳转至倍莱鲜平台完成激活");
+        document.getElementById("afterRegister").style.display = 'block';
+        document.getElementById("registerBtn").href = `http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`;
       }).catch(() => {
         alert("注册失败，请稍后再试");
       });
