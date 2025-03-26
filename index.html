@@ -92,17 +92,18 @@
       font-weight: bold;
     }
   </style>
-</head>
-<body>
   <script>
     // 限制页面只能在微信内打开
-    const ua = window.navigator.userAgent.toLowerCase();
-    if (!ua.includes('micromessenger')) {
-      document.body.innerHTML = '<div style="text-align:center;padding:80px 20px;font-size:16px;line-height:1.8;color:#444;">请在微信中打开本页面以继续操作。</div>';
-      throw new Error("非微信环境，终止运行");
+    const ua = navigator.userAgent.toLowerCase();
+    if (!ua.includes("micromessenger")) {
+      document.addEventListener("DOMContentLoaded", function () {
+        document.body.innerHTML = '<div style="text-align:center;padding:80px 20px;font-size:16px;line-height:1.8;color:#444;">请在微信中打开本页面以继续操作。</div>';
+        document.title = "请使用微信打开";
+      });
     }
   </script>
-
+</head>
+<body>
   <div class="container">
     <h1>欢迎加入元和集</h1>
     <p>我们为您提供专业的陪跑式健康服务，产品由官方平台提供，您可通过下方入口注册并领取专属礼包</p>
