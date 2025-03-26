@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      background-color: #f5f5f5;
+      background-color: #fffaf3;
       margin: 0;
       padding: 0;
       color: #333;
@@ -18,12 +18,12 @@
       background: white;
       padding: 30px;
       border-radius: 16px;
-      box-shadow: 0 6px 16px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 30px rgba(255, 165, 0, 0.1);
       text-align: center;
     }
     h1 {
       margin-bottom: 10px;
-      color: #1a1a1a;
+      color: #ff7f00;
     }
     p {
       color: #666;
@@ -35,28 +35,32 @@
     .step-title {
       font-weight: bold;
       margin-bottom: 10px;
+      color: #ff8c1a;
+      font-size: 18px;
     }
     input[type="text"], input[type="password"] {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin: 10px 0;
-      border: 1px solid #ccc;
-      border-radius: 6px;
+      border: 1px solid #ffd699;
+      border-radius: 8px;
       font-size: 14px;
+      background: #fff8ed;
     }
     .button {
       display: inline-block;
       padding: 12px 24px;
       margin: 10px 0;
-      background-color: #24c29a;
+      background-color: #ff8c1a;
       color: white;
       text-decoration: none;
-      border-radius: 8px;
+      border-radius: 10px;
       font-size: 16px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
     }
     .button:hover {
-      background-color: #1ea885;
+      background-color: #e67a00;
     }
     .tips {
       font-size: 12px;
@@ -74,21 +78,31 @@
       background-color: #fff;
       display: flex;
       justify-content: space-around;
-      border-top: 1px solid #ddd;
+      border-top: 1px solid #eee;
       padding: 10px 0;
+      box-shadow: 0 -2px 6px rgba(0,0,0,0.05);
     }
     .tabbar a {
       text-decoration: none;
-      color: #666;
+      color: #999;
       font-size: 14px;
     }
     .tabbar a.active {
-      color: #24c29a;
+      color: #ff7f00;
       font-weight: bold;
     }
   </style>
 </head>
 <body>
+  <script>
+    // 限制页面只能在微信内打开
+    const ua = window.navigator.userAgent.toLowerCase();
+    if (!ua.includes('micromessenger')) {
+      document.body.innerHTML = '<div style="text-align:center;padding:80px 20px;font-size:16px;line-height:1.8;color:#444;">请在微信中打开本页面以继续操作。</div>';
+      throw new Error("非微信环境，终止运行");
+    }
+  </script>
+
   <div class="container">
     <h1>欢迎加入元和集</h1>
     <p>我们为您提供专业的陪跑式健康服务，产品由官方平台提供，您可通过下方入口注册并领取专属礼包</p>
